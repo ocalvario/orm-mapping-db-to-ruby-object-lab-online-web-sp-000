@@ -59,6 +59,7 @@ class Student
     DB[:conn].execute(sql)
   end
   
+<<<<<<< HEAD
     def self.students_below_12th_grade
     sql = <<-SQL
     SELECT * 
@@ -115,5 +116,39 @@ class Student
       self.new_from_db(row)
     end
   end
+=======
+   def self.students_below_12th_grade
+    sql = <<-SQL
+    SELECT * 
+    FROM students 
+    WHERE students.grade < 12
+    SQL
+    DB[:conn].execute(sql).collect do |row|
+      self.new_from_db(row)
+    end
+  end
+  
+    def self.first_student_in_grade_10
+    sql = <<-SQL
+    SELECT * 
+    FROM students
+    WHERE students.grade = 10
+    LIMIT 1
+    SQL
+    DB[:conn].execute(sql).collect do |row|
+      self.new_from_db(row)
+    end
+    
+  def self.count_all_students_in_grade_9
+  sql = <<-SQL
+  SELECT *
+  FROM students
+  WHERE students.grade = 9
+  SQL
+  DB[:conn].execute(sql).collect do |row|
+    self.new_from_db(row)
+  end
+end
+>>>>>>> c3114c4abf26833aaf4e23c117ae6bc6cd0c37f3
   
 end
